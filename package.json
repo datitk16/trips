@@ -1,0 +1,25 @@
+{
+  "name": "fullstack_nodejs_api_lession5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start":"node server.js",
+    "debug":"nodemon server.js",
+    "debug:log-win": "set DEBUG=* & nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devcodedao/Fullstack_nodejs_Api_lession5.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devcodedao/Fullstack_nodejs_Api_lession5/issues"
+  },
+  "homepage": "https://github.com/devcodedao/Fullstack_nodejs_Api_lession5#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.7.6"
+  }
+}
