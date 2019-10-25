@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"node server.js",
-    "debug":"nodemon server.js",
+    "start": "node server.js",
+    "debug": "nodemon server.js",
     "debug:log-win": "set DEBUG=* & nodemon server.js"
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/devcodedao/Fullstack_nodejs_Api_lession5#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "mongoose": "^5.7.6"
   }
