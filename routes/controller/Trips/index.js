@@ -8,4 +8,7 @@ const router = express.Router();
  */
 router.post('', Trip.createTrips)
 router.get('', Trip.getTrips)
+router.get('/:id', Trip.getTripById)
+router.put('/:id', Trip.updateTripById)
+router.delete('/:id', Trip.deleteById)
 module.exports=router;
