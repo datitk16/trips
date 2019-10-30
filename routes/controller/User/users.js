@@ -37,7 +37,7 @@ module.exports.login = (req, res, next) => {
         .then(result => {
             const [isMatch, user] = result
             if (!isMatch) return Promise.reject({ status: 400, message: "Password is correct" });
-           
+
             const payload = {
                 email: user.email,
                 userType: user.userType
@@ -46,11 +46,21 @@ module.exports.login = (req, res, next) => {
         })
         .then(token => {
             console.log(token)
-            return res.status(200).json({token})
+            return res.status(200).json({ token })
         })
         .catch(err => {
             console.log(err)
             if (err.status) return res.status(err.status).json(err.message);
             return res.status(500).json(err)
         })
+}
+module.exports.uploadImage = (req, res, next) => {
+    const { email } = req.user;
+    User.findOne({ email })
+        .then(user => {
+            user.avatar = req.file.path;
+            return user.save()
+        })
+        .then(user => res.status(200).json(user))
+        .catch(err => status(404).json(err))
 }

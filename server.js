@@ -21,3 +21,4 @@ const port=5000;
 app.listen(port,()=>{
     console.log(`Sever running on port: ${port}`)
 })
+app.use('uploade',express.static('./uploads'))
