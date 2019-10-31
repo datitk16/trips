@@ -54,6 +54,14 @@ module.exports.login = (req, res, next) => {
             return res.status(500).json(err)
         })
 }
+
+module.exports.testPrivate=(req,res,next)=>{
+    res.status(200).json({
+        message:"Access login successfully",
+        user:req.user
+    })
+}
+
 module.exports.uploadImage = (req, res, next) => {
     const { email } = req.user;
     User.findOne({ email })
@@ -64,3 +72,4 @@ module.exports.uploadImage = (req, res, next) => {
         .then(user => res.status(200).json(user))
         .catch(err => status(404).json(err))
 }
+

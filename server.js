@@ -12,6 +12,7 @@ mongoose.connect('mongodb://localhost:27017/fs07-vexere',
 
 const app=express();
 app.use(express.json())
+app.use('/uploads',express.static('./uploads'))
 /**
  * @param su dung use khi khong xac dinh dung phuong thuc
  */

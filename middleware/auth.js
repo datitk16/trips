@@ -18,9 +18,7 @@ module.exports.authorize = (userTypeArr) => {
         const { user } = req;
         console.log(user);
         
-        if (userTypeArr.findIndex(elm => { return elm === user.userType })>-1) return res.status(200).json({msg: 'hello'})
-
-
+        if (userTypeArr.findIndex(elm => { return elm === user.userType })>-1) return next()
 
         return res.status(403).json({ message: "Ban da dang nhap nhung khong co quyen" })
     }
