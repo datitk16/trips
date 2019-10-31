@@ -1,6 +1,6 @@
 const { Ticket } = require('./../../../model/Ticket');
-const { Trip } = require('./../../../model/Trip')
-
+const { Trip } = require('./../../../model/Trip');
+const {sendSuccessfulRegisterEmail}=require('./../../../services/bookTicket')
 module.exports.createTicket = (req, res, next) => {
     /**
    * @note Trong payload chưa ký :_id
@@ -11,10 +11,16 @@ module.exports.createTicket = (req, res, next) => {
     Trip.findById(tripId)
         .then(trip => {
             if (!trip) return Promise.reject({ status: 404, message: "Trip not found" })
+            /**
+             * @todo availableSeats :  lay ds seat còn trống chưa có người isBook
+             */
             const availableSeats = trip.seats
-                .filter(seat =>!seat.isBook)
+                .filter(seat => !seat.isBook)
                 .map(seat => seat.code)
             let errSeats = [];
+            /**
+             * @todo seatCodes.forEach : kiểm tra ds ghế đang đặt đã có người đặt chưa
+             */
             seatCodes.forEach(seatCode => {
                 if (availableSeats.indexOf(seatCode) === -1) errSeats.push(seatCode)
             });
@@ -28,6 +34,9 @@ module.exports.createTicket = (req, res, next) => {
                 seats: seatCodes.map(seat => ({ code: seat, isBook: true })),
                 totalPrice: trip.price * seatCodes.length
             })
+            /**
+             * @Todo cập nhật lại ds ghế trong Trip
+             */
             trip.seats = trip.seats.map(seat => {
                 if (seatCodes.indexOf(seat.code) > -1) {
                     seat.isBook = true
@@ -38,7 +47,9 @@ module.exports.createTicket = (req, res, next) => {
             return Promise.all([newTicket.save(), trip.save()])
         })
         .then(result => {
+          
             res.status(200).json(result[0])
+           sendSuccessfulRegisterEmail()
         })
         .catch(err => {
             if (err.status) return res.status(err.status).json(err.message)
