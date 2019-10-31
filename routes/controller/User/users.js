@@ -9,8 +9,8 @@ const genSalt = promisify(bcrypt.genSalt);
 const hash = promisify(bcrypt.hash)
 module.exports.createUser = (req, res, next) => {
     console.log(req.body)
-    const { email, password, fullName } = req.body;
-    const newUser = new User({ email, password, fullName })
+    const { email, password, fullName,userType } = req.body;
+    const newUser = new User({ email, password, fullName,userType })
     User.findOne({ email })
         .then(user => {
             if (user) return Promise.reject({ status: 404, message: "Email existed" })

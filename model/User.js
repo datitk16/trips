@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   fullName: { type: String, required: true },
-  userType: { type: String, default: 'KhachHang' },
+  userType: { type: String, default: 'user' },
   avatar: { type: String }
 })
 UserSchema.pre("save", function save(next) {
