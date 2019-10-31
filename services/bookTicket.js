@@ -5,7 +5,7 @@ module.exports.sendSuccessfulRegisterEmail = () => {
        service:'gmail',
         auth: {
             user: "16110304@student.hcmute.edu.vn",
-            pass: "nguyendinhdat977"
+            pass: ""
         }
     }
     const transporter = nodemailer.createTransport(transport);
