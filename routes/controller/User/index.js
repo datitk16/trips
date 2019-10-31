@@ -12,7 +12,7 @@ const {validatePostInput}=require('../../../middleware/validation/users/validate
  */
 router.post('/',validatePostInput, UserController.createUser)
 router.post('/login', UserController.login)
-router.get('/private',authenticate,authorize(['KhachHang']),UserController.testPrivate)
+router.get('/private',authenticate,authorize(['admin']),UserController.testPrivate)
 router.post('/avatar',authenticate,uploadImage("avatar"),UserController.uploadImage)
 
 module.exports=router;

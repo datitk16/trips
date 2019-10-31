@@ -9,8 +9,8 @@ const genSalt = promisify(bcrypt.genSalt);
 const hash = promisify(bcrypt.hash)
 module.exports.createUser = (req, res, next) => {
     console.log(req.body)
-    const { email, password, fullName,userType } = req.body;
-    const newUser = new User({ email, password, fullName,userType })
+    const { email, password, fullName, userType } = req.body;
+    const newUser = new User({ email, password, fullName, userType })
     User.findOne({ email })
         .then(user => {
             if (user) return Promise.reject({ status: 404, message: "Email existed" })
@@ -39,10 +39,15 @@ module.exports.login = (req, res, next) => {
             if (!isMatch) return Promise.reject({ status: 400, message: "Password is correct" });
 
             const payload = {
+                _id:user._id,
                 email: user.email,
                 userType: user.userType
             }
+            /**
+             * @Howto format err khi hết thời gian
+             */
             return jwtSign(payload, "nhandeptrai", { expiresIn: 3600 })
+
         })
         .then(token => {
             console.log(token)
@@ -55,10 +60,10 @@ module.exports.login = (req, res, next) => {
         })
 }
 
-module.exports.testPrivate=(req,res,next)=>{
+module.exports.testPrivate = (req, res, next) => {
     res.status(200).json({
-        message:"Access login successfully",
-        user:req.user
+        message: "Access login successfully",
+        user: req.user
     })
 }
 
