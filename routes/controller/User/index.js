@@ -3,7 +3,6 @@ const express = require('express');
 const UserController = require('./users')
 const router = express.Router();
 const {authenticate,authorize}=require('./../../../middleware/auth');
-const multer=require('multer')
 const {uploadImage}=require('./../../../middleware/aploadImage')
 const {validatePostInput}=require('../../../middleware/validation/users/validate.post.input')
 /**

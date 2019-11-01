@@ -10,7 +10,7 @@ module.exports.sendSuccessfulRegisterEmail = () => {
     }
     const transporter = nodemailer.createTransport(transport);
     const mailOptions = {
-        from: "datndd2604@gmail.com",
+        from: "16110304@student.hcmute.edu.vn",
         to: "nguyendataht@gmail.com",
         subject: "Mail xác nhận mua vé!",
         html: "Cảm ơn bạn đã mua vé"

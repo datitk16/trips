@@ -44,3 +44,8 @@ module.exports.deleteById=(req,res,next)=>{
     .then(()=> res.status(204).json({message:"Delete success"}))
     .catch(err=>res.json(err))
 }
+
+
+// api/trips?pageNumber=2&pageSize=3
+// req.url
+// url.parse(req.url).query

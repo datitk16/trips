@@ -1,14 +1,19 @@
 const multer = require('multer');
-
+const mkdirp = require('mkdirp')
 module.exports.uploadImage = (type) => {
-    const storage = multer.diskStorage({
-         destination:function(req,file,cb){
-             cb(null,`./uploads/${type}`)
-         },
-         filename:function(req,file,cb){
-             cb(null,`${Date.now()}-${file.originalname}`)
-         }
+    mkdirp(`./uploads/${type}`, (err) => {
+        if (err) return console.log(err)
+       
     })
-    const upload=multer({storage})
+    const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, `./uploads/${type}`)
+        },
+        filename: function (req, file, cb) {
+            cb(null, `${Date.now()}-${file.originalname}`)
+        }
+    })
+    const upload = multer({ storage })
     return upload.single(type)
+   
 }
