@@ -7,7 +7,8 @@ const router = express.Router();
  * 
  * @todo create get getById,updateById,delete
  */
-router.post('/',authenticate, StationsController.createStations)
+router.post('/', StationsController.createStations)
+router.get('/trips',StationsController.getStationPageId)
 router.get('', StationsController.getStation)
 router.get('/:id', StationsController.getStationById)
 router.put('/:id',authenticate, StationsController.updateStationById)
