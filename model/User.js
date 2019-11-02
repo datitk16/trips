@@ -10,7 +10,8 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   fullName: { type: String, required: true },
   userType: { type: String, default: 'user' },
-  avatar: { type: String }
+  avatar: { type: String },
+  resetPasswordToken: { type: String, default: null }
 })
 UserSchema.pre("save", function save(next) {
   const user = this;

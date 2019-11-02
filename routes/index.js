@@ -10,5 +10,6 @@ router.use('/api/stations',stationRouter)
 router.use('/api/trips',tripRouter)
 router.use('/api/users',userRouter)
 router.use('/api/tickets',ticketRouter)
+
 module.exports = router;
 
