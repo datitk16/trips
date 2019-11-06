@@ -9,6 +9,8 @@ module.exports.createTicket = (req, res, next) => {
     const { tripId, seatCodes } = req.body;
     // console.log(userId, tripId, seatCodes)
     Trip.findById(tripId)
+        .populate("toStation")
+        .populate("fromStation")
         .then(trip => {
             if (!trip) return Promise.reject({ status: 404, message: "Trip not found" })
             /**
@@ -49,7 +51,7 @@ module.exports.createTicket = (req, res, next) => {
         .then(result => {
           
             res.status(200).json(result[0])
-           sendSuccessfulRegisterEmail()
+           sendSuccessfulRegisterEmail(result[0],result[1],req.user)
         })
         .catch(err => {
             if (err.status) return res.status(err.status).json(err.message)

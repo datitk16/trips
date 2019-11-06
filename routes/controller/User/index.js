@@ -12,7 +12,7 @@ const nodemailer = require('nodemailer')
  * 
  * @todo create get getById,updateById,delete
  */
-router.post('/create', validatePostInput, UserController.createUser)
+router.post('/', validatePostInput, UserController.createUser)
 router.post('/login', UserController.login)
 router.get('/private', authenticate, authorize(['admin']), UserController.testPrivate)
 router.post('/avatar', authenticate, uploadImage("avatar"), UserController.uploadImage)

@@ -5,6 +5,7 @@ const TicketController=require('./Ticket')
 const {authenticate} =require('./../../../middleware/auth')
 
 router.post('/',authenticate,TicketController.createTicket);
+// router.post('/',TicketController.createTicket);
 
 
 module.exports=router;

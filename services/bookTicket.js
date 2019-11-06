@@ -1,19 +1,31 @@
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+const fs = require('fs');
+const hogan = require('hogan.js')
 
-module.exports.sendSuccessfulRegisterEmail = () => {
+const template = fs.readFileSync('services/bookTicket.hjs', 'utf-8');
+const compiled = hogan.compile(template)
+module.exports.sendSuccessfulRegisterEmail = (ticket, trip, user) => {
     const transport = {
-       service:'gmail',
+        service: 'gmail',
         auth: {
-            user: "16110304@student.hcmute.edu.vn",
-            pass: ""
+            user: "devdao2604@gmail.com",
+            pass: "07082604"
         }
     }
     const transporter = nodemailer.createTransport(transport);
     const mailOptions = {
-        from: "16110304@student.hcmute.edu.vn",
+        from: "devdao2604@gmail.com",
         to: "nguyendataht@gmail.com",
         subject: "Mail xác nhận mua vé!",
-        html: "Cảm ơn bạn đã mua vé"
+        html: compiled.render({
+            email: "devdao2604@gmail.com",
+            fromStation: `${trip.fromStation.name},${trip.fromStation.province}`,
+            toStation: `${trip.toStation.name},${trip.toStation.province}`,
+            price: trip.price,
+            seats: ticket.seats.map(e => e.code).toString(),
+            amount: ticket.seats.length,
+            total: ticket.seats.length * trip.price,
+        })
     }
     transporter.sendMail(mailOptions, (error) => {
         if (error) {
@@ -21,6 +33,6 @@ module.exports.sendSuccessfulRegisterEmail = () => {
         }
         console.log("success")
     })
-    
+
 
 }
