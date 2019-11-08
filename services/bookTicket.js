@@ -4,18 +4,19 @@ const hogan = require('hogan.js')
 
 const template = fs.readFileSync('services/bookTicket.hjs', 'utf-8');
 const compiled = hogan.compile(template)
+const keys=require('./../config/index')
 module.exports.sendSuccessfulRegisterEmail = (ticket, trip, user) => {
     const transport = {
         service: 'gmail',
         auth: {
-            user: "devdao2604@gmail.com",
-            pass: "07082604"
+            user: keys.email,
+            pass: keys.password
         }
     }
     const transporter = nodemailer.createTransport(transport);
     const mailOptions = {
-        from: "devdao2604@gmail.com",
-        to: "nguyendataht@gmail.com",
+        from: keys.email,
+        to: user.email,
         subject: "Mail xác nhận mua vé!",
         html: compiled.render({
             email: "devdao2604@gmail.com",

@@ -1,12 +1,15 @@
 const { User } = require('./../../../model/User')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
-
+require('dotenv').config()
 const { promisify } = require('util')
 const comparePassword = promisify(bcrypt.compare)
 const jwtSign = promisify(jwt.sign)
 const genSalt = promisify(bcrypt.genSalt);
 const hash = promisify(bcrypt.hash)
+
+
+const keys=require('./../../../config/index')
 module.exports.createUser = (req, res, next) => {
     console.log(req.body)
     const { email, password, fullName, userType } = req.body;
@@ -46,7 +49,7 @@ module.exports.login = (req, res, next) => {
             /**
              * @Howto format err khi hết thời gian
              */
-            return jwtSign(payload, "nhandeptrai", { expiresIn: 3600 })
+            return jwtSign(payload, keys.serect_key, { expiresIn: 3600 })
 
         })
         .then(token => {

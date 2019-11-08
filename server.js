@@ -1,23 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const myRouter = require('./routes/index')
+require('dotenv').config()
+const keys=require('./config/index')
+console.log(keys)
 
-console.log("node env", process.env.NODE_ENV)
-const mong_cloud_url = 'mongodb+srv://admin:admin@cluster0-nqivn.mongodb.net/vexere?retryWrites=true&w=majority';
-const mong_local_url = 'mongodb://localhost:27017/fs07-vexere'
-let mong_url;
-if (process.env.NODE_ENV === "local") {
-    mong_url = mong_local_url
-}
-else if (process.env.NODE_ENV === "staging") {
-    mong_url = mong_cloud_url
-}
-mongoose.connect(mong_url,
+mongoose.connect(keys.mong_url,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
-    .then(() => console.log(`Connected to mongodb ${mong_url}`))
+    .then(() => console.log(`Connected to mongodb ${keys.mong_url}`))
     .catch(console.log)
 
 const app = express();
@@ -28,7 +21,7 @@ app.use('/uploads', express.static('./uploads'))
  */
 
 app.use('/', myRouter)
-const port = 5000;
+const port = process.env.PORT_LOCAL||keys.port;
 app.listen(port, () => {
     console.log(`Sever running on port: ${port}`)
 })
