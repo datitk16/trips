@@ -22,7 +22,7 @@ app.use('/',express.static('./public'))
  */
 
 app.use('/', myRouter)
-const port = process.env.PORT_LOCAL||keys.port;
+const port = process.env.PORT||keys.port;
 app.listen(port, () => {
     console.log(`Sever running on port: ${port}`)
 })
