@@ -4,6 +4,7 @@ require('dotenv').config()
 let mong_url;
 let serect_key;
 let port;
+let email;
 switch (process.env.NODE_ENV) {
     case 'local':
         mong_url =process.env.MONGO_LOCALHOST_URL
