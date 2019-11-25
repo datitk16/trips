@@ -29,6 +29,26 @@ module.exports.createUser = (req, res, next) => {
  * @todo login CREDENTIALS:email + password
  */
 
+module.exports.getUser = (req, res, next) => {
+    User.find()
+        .then(user => res.status(200).json(user))
+        .catch(err => res.status(404).json(err))
+}
+module.exports.getUserById = (req, res, next) => {
+    const id = req.params;
+    User.findById(id)
+        .then(user => res.status(200).json(user))
+        .catch(err => res.status(404).json(err))
+}
+
+module.exports.deleteUserById = (req, res, next) => {
+    const id = req.params;
+    User.deleteOne(id)
+    .then(()=>res.status(200).json({message:"Delete success"}))
+    .catch(err=>res.status(404).json(err))
+}
+
+
 module.exports.login = (req, res, next) => {
     const { email, password } = req.body;
     User.findOne({ email })
