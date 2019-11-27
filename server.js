@@ -19,7 +19,7 @@ app.use(express.json())
 app.use('/uploads', express.static('./uploads'))
 // app.use('/',express.static('./public'))
 // app.use('/docs',require('./routes/doc'))
-app.use('/',express.static('./routes/doc'))
+app.use('/',express.static('./routes/doc')
 
 /**
  * @param su dung use khi khong xac dinh dung phuong thuc
