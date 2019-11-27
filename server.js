@@ -24,6 +24,10 @@ app.use('/docs',require('./routes/doc'))
  * @param su dung use khi khong xac dinh dung phuong thuc
  */
 // Add headers
+
+/**
+ * @todo fix bug when call api but web can't call api
+ */
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
