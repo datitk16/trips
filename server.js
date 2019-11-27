@@ -1,7 +1,8 @@
+require('dotenv').config()
+
 const express = require('express');
 const mongoose = require('mongoose');
 const myRouter = require('./routes/index')
-require('dotenv').config()
 const keys=require('./config/index')
 console.log(keys)
 
@@ -17,6 +18,8 @@ const app = express();
 app.use(express.json())
 app.use('/uploads', express.static('./uploads'))
 app.use('/',express.static('./public'))
+app.use('/docs',require('./routes/doc'))
+
 /**
  * @param su dung use khi khong xac dinh dung phuong thuc
  */
