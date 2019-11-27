@@ -17,8 +17,8 @@ mongoose.connect(keys.mong_url,
 const app = express();
 app.use(express.json())
 app.use('/uploads', express.static('./uploads'))
-app.use('/',express.static('./routes/doc'))
-// app.use('/docs',require('./routes/doc'))
+app.use('/',express.static('./public'))
+app.use('/docs',require('./routes/doc'))
 
 /**
  * @param su dung use khi khong xac dinh dung phuong thuc
@@ -26,7 +26,7 @@ app.use('/',express.static('./routes/doc'))
 // Add headers
 
 /**
- * @todo fix bug when call api but web can't call api
+ * @todo fix bug when call api but web can't call
  */
 app.use(function (req, res, next) {
 
