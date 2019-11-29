@@ -9,11 +9,9 @@ let password;
 switch (process.env.NODE_ENV) {
     case 'local':
         mong_url =process.env.MONGO_LOCALHOST_URL
-      
         serect_key = process.env.MONGO_STATING_URL
         port=process.env.PORT_LOCAL
         email=process.env.EMAIL_LOCAL
-        
         password=process.env.PASSWORD_LOCAL
         break;
     case 'staging':

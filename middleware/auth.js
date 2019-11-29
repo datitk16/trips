@@ -2,11 +2,12 @@ const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const multer=require('multer')
 const jwtVerify = promisify(jwt.verify);
+const keys=require('./../config/index')
 
 module.exports.authenticate = (req, res, next) => {
     const token = req.header('token');
     if (!token) return res.status(401).json({ message: "Not found token" })
-    jwtVerify(token, 'nhandeptrai')
+    jwtVerify(token, keys.serect_key)
         .then(decoded => {
              /**
              * @todo req.user = decoded lấy cái uer decode từ token tại header gán bằng decoded để 
