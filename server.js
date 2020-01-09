@@ -26,7 +26,7 @@ app.use('/docs',require('./routes/doc'))
 // Add headers
 
 /**
- * @todo fix bug when call api but web can't call
+ * @todo fix bug when call api but web can't call CORS
  */
 app.use(function (req, res, next) {
 

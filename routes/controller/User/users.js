@@ -50,7 +50,7 @@ module.exports.deleteUserById = (req, res, next) => {
 
 
 module.exports.login = (req, res, next) => {
-    const { email, password } = req.query;
+    const { email, password } = req.body;
     User.findOne({ email })
         .then(user => {
             if (!user) return Promise.reject({ status: 404, message: "Not found" });
